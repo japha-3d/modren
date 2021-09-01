@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %} japha {% endblock title %} {% block content %}
+<div class="col-lg-6">
+    <div class="card shadow-custom border-0 mb-4">
+        <div class="card-body text-center">
+            <h2 class="font-weight-bold text-grey">
+                Search Results
+            </h2>
+            {% if products|length < 1 %} <p>No product is matched with your search results</p> {% endif %}
+                <div class="bottom_line"></div>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        {% for product in products %}
+        <div class="col-sm-6">
+            <div class="card product">
+                <div class="item">
+                    <div class="item-image">
+                        <img style='height:270px; width:320px;' src="{{ product.main_image.url }}" alt="" class="img-fluid rounded-0">
+                    </div>
+                    <div class="item-text">
+                        <div class="item-text-wrap">
+                            <a href="{{product.get_absolute_url}}" class="h2 text-white text-decoration-none">
+                                <i class="fas fa-search-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        {{ product.name }}
+                        <hr>
+                        <span>RS: {{ product.price }}</span><br> {% if product.discount %}
+
+                        <span><div>
+               {{product.percentage}} <i class="fas fa-percentage"></i> off
+              </div></span> {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
